@@ -34,14 +34,16 @@ function App() {
     
     await api.delete(`repositories/${id}`);
 
-    const repositoryIndex = repositories.findIndex(rep => rep.id === id);
-    repositories.splice(repositoryIndex,1);
+    // funcionou mas acho que não é correto
+    // const repositoryIndex = repositories.findIndex(rep => rep.id === id);
+    // repositories.splice(repositoryIndex,1);
+    // setRepositories([...repositories]);
 
-    
-    //const novo = repositories.splice(repositoryIndex, 1);
-
-    
-    setRepositories([...repositories]);
+    // assim remonta o array com todos os itens diferente ao removido
+    // e não interfere no conceito de imutabilidade!!!!
+    setRepositories(repositories.filter(
+      repository => repository.id !== id
+    ))
 
     
     
